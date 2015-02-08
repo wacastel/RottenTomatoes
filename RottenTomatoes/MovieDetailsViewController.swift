@@ -12,6 +12,7 @@ class MovieDetailsViewController: UIViewController {
     var selectedMovie: NSDictionary?
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var moviePoster: UIImageView!
+    @IBOutlet weak var movieDetailsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +22,21 @@ class MovieDetailsViewController: UIViewController {
         self.movieTitle.text = self.selectedMovie?["title"] as NSString
         let posters = self.selectedMovie?["posters"] as NSDictionary
         let posterUrl = posters["original"] as NSString
+        let fullPosterUrl = getFullSizedUrl(posterUrl)
         //cell.movieTitleThumbnail.setImageWithURL(NSURL(string:thumbnailUrl))
-        moviePoster.setImageWithURL(NSURL(string:posterUrl))
-        
+        moviePoster.setImageWithURL(NSURL(string:fullPosterUrl))
+        movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
+        movieDetailsLabel.numberOfLines = 0
     }
+    
+    func getFullSizedUrl(inputString: NSString) -> NSString {
+        let newString = inputString.stringByReplacingOccurrencesOfString("tmb", withString: "ori")
+        return newString
+    }
+    
+    /*override func viewDidLayoutSubviews() {
+        movieDetailsLabel.sizeToFit()
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omx-BR-qGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244" y="-356"/>
+            <point key="canvasLocation" x="244" y="-355.99999999999994"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Sul-c8-7he">
@@ -31,7 +31,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="T2c-ij-LtY" userLabel="ErrorMessageView">
-                            <rect key="frame" x="0.0" y="160" width="600" height="48"/>
+                            <rect key="frame" x="0.0" y="184" width="600" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Network Error" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfT-I4-Y2Z">
@@ -47,7 +47,7 @@
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.codepath.mycell" rowHeight="98" id="n4H-a6-Nid" customClass="MovieTableViewCell" customModule="RottenTomatoes" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="com.codepath.mycell" rowHeight="98" id="n4H-a6-Nid" customClass="MovieTableViewCell" customModule="RottenTomatoes" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n4H-a6-Nid" id="8Fm-SY-m1x">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -61,7 +61,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Synopsis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OY-gw-xII" userLabel="Synopsis Label">
                                             <rect key="frame" x="71" y="32" width="286" height="57"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r5u-dt-9UP">
@@ -100,42 +100,58 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg7-ph-Hej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="-356"/>
+            <point key="canvasLocation" x="1048" y="-355.99999999999994"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="cjV-ev-GmN">
             <objects>
                 <viewController id="his-qQ-a0O" customClass="MovieDetailsViewController" customModule="RottenTomatoes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iV0-HE-c1R"/>
-                        <viewControllerLayoutGuide type="bottom" id="Spw-AF-UZi"/>
+                        <viewControllerLayoutGuide type="top" id="u04-Ad-VAp"/>
+                        <viewControllerLayoutGuide type="bottom" id="G5r-vQ-b7D"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="q8B-fT-0An">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="q8B-fT-0An">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K6T-T8-9aJ">
-                                <rect key="frame" x="0.0" y="64" width="419" height="536"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-XY-6IS">
-                                <rect key="frame" x="10" y="571" width="310" height="21"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRJ-Sl-OPs">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7H-an-dbg" userLabel="BackgroundLabel">
+                                        <rect key="frame" x="8" y="220" width="304" height="649"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUP-kI-lYk" userLabel="TextLabel">
+                                        <rect key="frame" x="8" y="220" width="304" height="488"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-XY-6IS">
+                                        <rect key="frame" x="0.0" y="8" width="320" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6gL-qm-llV"/>
                     <connections>
+                        <outlet property="movieDetailsLabel" destination="LUP-kI-lYk" id="bD3-Ee-raF"/>
                         <outlet property="moviePoster" destination="K6T-T8-9aJ" id="PcC-f9-iqv"/>
                         <outlet property="movieTitle" destination="uYb-XY-6IS" id="uoO-Gc-BJa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pa1-Dc-8Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="-358"/>
+            <point key="canvasLocation" x="1884" y="-359"/>
         </scene>
     </scenes>
     <resources>

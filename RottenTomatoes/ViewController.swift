@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.fetchDataFromServer()
+        self.navigationItem.title = "Movies"
     }
     
     func fetchDataFromServer()

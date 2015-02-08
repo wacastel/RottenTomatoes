@@ -23,10 +23,10 @@ class MovieDetailsViewController: UIViewController {
         let posters = self.selectedMovie?["posters"] as NSDictionary
         let posterUrl = posters["original"] as NSString
         let fullPosterUrl = getFullSizedUrl(posterUrl)
-        //cell.movieTitleThumbnail.setImageWithURL(NSURL(string:thumbnailUrl))
         moviePoster.setImageWithURL(NSURL(string:fullPosterUrl))
         movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
         movieDetailsLabel.numberOfLines = 0
+        self.navigationItem.title = self.selectedMovie?["title"] as NSString
     }
     
     func getFullSizedUrl(inputString: NSString) -> NSString {

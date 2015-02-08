@@ -19,14 +19,14 @@ class MovieDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        self.navigationItem.title = self.selectedMovie?["title"] as NSString
         self.movieTitle.text = self.selectedMovie?["title"] as NSString
         let posters = self.selectedMovie?["posters"] as NSDictionary
         let posterUrl = posters["original"] as NSString
         let fullPosterUrl = getFullSizedUrl(posterUrl)
         moviePoster.setImageWithURL(NSURL(string:fullPosterUrl))
-        movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
         movieDetailsLabel.numberOfLines = 0
-        self.navigationItem.title = self.selectedMovie?["title"] as NSString
+        movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
     }
     
     func getFullSizedUrl(inputString: NSString) -> NSString {
@@ -34,9 +34,9 @@ class MovieDetailsViewController: UIViewController {
         return newString
     }
     
-    /*override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         movieDetailsLabel.sizeToFit()
-    }*/
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

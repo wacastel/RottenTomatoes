@@ -13,6 +13,9 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var moviePoster: UIImageView!
     @IBOutlet weak var movieDetailsLabel: UILabel!
+    @IBOutlet weak var detailsScrollView: UIScrollView!
+    @IBOutlet weak var textBackgroundLabel: UILabel!
+    //var myBackgroundLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,19 @@ class MovieDetailsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         movieDetailsLabel.sizeToFit()
+        movieTitle.sizeToFit()
+        let totalWidth = movieDetailsLabel.frame.size.width
+        let totalHeight = movieDetailsLabel.frame.size.height + movieTitle.frame.size.height + 400
+        detailsScrollView.contentSize = CGSizeMake(totalWidth, totalHeight)
+        detailsScrollView.bounces = false
+        detailsScrollView.scrollEnabled = true
+        //myBackgroundLabel = UILabel(frame: CGRectZero)
+        //self.detailsScrollView.addSubview(myBackgroundLabel)
+        textBackgroundLabel.backgroundColor = UIColor.blackColor()
+        textBackgroundLabel.alpha = 0.5
+        let bgFrameSizeHeight = movieDetailsLabel.frame.size.height + movieTitle.frame.size.height + 20
+        let bgFrameOriginY = movieTitle.frame.origin.y
+        textBackgroundLabel.frame = CGRect(x: movieDetailsLabel.frame.origin.x, y: bgFrameOriginY, width: movieDetailsLabel.frame.size.width, height: bgFrameSizeHeight)
     }
 
     override func didReceiveMemoryWarning() {

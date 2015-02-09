@@ -27,8 +27,21 @@ class MovieDetailsViewController: UIViewController {
         self.navigationItem.title = self.selectedMovie?["title"] as NSString
         self.movieTitle.text = self.selectedMovie?["title"] as NSString
         
-        self.loadThumbnailImage()
-        self.loadFullSizedImage()
+        let posters = self.selectedMovie?["posters"] as NSDictionary
+        let posterUrl = posters["original"] as NSString
+        
+        // Check the image cache for the existing key. This is just a dictionary of UIImages.
+        var image = self.imageCache[posterUrl]
+        
+        if (image == nil) {
+            println("*** fetching thumbnail and full-sized images <\(posterUrl)> across the network! ***")
+            self.loadThumbnailImage()
+            self.loadFullSizedImage()
+        }
+        else {
+            self.moviePoster.image = image
+            println("*** full-sized image <\(posterUrl)> loaded successfully from image cache!")
+        }
         
         movieDetailsLabel.numberOfLines = 0
         movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
@@ -56,6 +69,7 @@ class MovieDetailsViewController: UIViewController {
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
                         self.moviePoster.alpha = 1.0
                     })
+                    println("*** thumbnail image fetched successfully from network! ***")
                 }
             }, failure: nil)
     }
@@ -73,6 +87,12 @@ class MovieDetailsViewController: UIViewController {
             success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
                 self.moviePoster.image = image
                 self.fullSizedLoaded = true
+                
+                // Store the image in the image cache
+                self.imageCache[posterUrl] = image
+                
+                println("*** full-sized image fetched successfully from network! ***")
+                
             }, failure: nil)
     }
     

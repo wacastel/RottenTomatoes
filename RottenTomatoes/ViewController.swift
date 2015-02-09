@@ -86,7 +86,7 @@ class ViewController: UITableViewController {
         var image = self.imageCache[thumbnailUrl]
         
         if (image == nil) {
-            println("*** fetching thumbnail image <\(thumbnailUrl)>  across the network! ***")
+            println("*** fetching thumbnail image <\(thumbnailUrl)> across the network! ***")
             cell.movieTitleThumbnail.setImageWithURLRequest(url_request, placeholderImage: placeholder,
                 success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
                     cell.movieTitleThumbnail.alpha = 0.0
@@ -98,11 +98,12 @@ class ViewController: UITableViewController {
                     // Store the image in the image cache
                     self.imageCache[thumbnailUrl] = image
                     
-                    println("*** thumbnail image fetched successfully! ***")
+                    println("*** thumbnail image fetched successfully from network! ***")
                     
             }, failure: nil)
         }
         else {
+            cell.movieTitleThumbnail.image = image
             println("*** thumbnail image <\(thumbnailUrl)> loaded successfully from image cache!")
         }
         

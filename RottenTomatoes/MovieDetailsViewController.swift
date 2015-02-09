@@ -17,6 +17,7 @@ class MovieDetailsViewController: UIViewController {
     
     var selectedMovie: NSDictionary?
     var fullSizedLoaded: Bool = false
+    var imageCache = [String : UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

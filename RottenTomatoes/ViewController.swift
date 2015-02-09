@@ -9,16 +9,22 @@
 import UIKit
 
 class ViewController: UITableViewController {
-
-    var moviesArray: NSArray?
+    
     @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var synopsis: UILabel!
+    
+    var moviesArray: NSArray?
+    var imageCache = [String : UIImage]()
     
     override func viewDidAppear(animated: Bool) {
         println("*** viewDidAppear")
         super.viewDidAppear(animated)
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.fetchDataFromServer()
+        
+        if (self.moviesArray == nil) {
+            self.fetchDataFromServer()
+        }
+        
         self.navigationItem.title = "Movies"
     }
     
@@ -76,15 +82,29 @@ class ViewController: UITableViewController {
         let url_request = NSURLRequest(URL: image_url!)
         let placeholder = UIImage(named: "no_photo")
         
-        cell.movieTitleThumbnail.setImageWithURLRequest(url_request, placeholderImage: placeholder,
-            success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
-                cell.movieTitleThumbnail.alpha = 0.0
-                cell.movieTitleThumbnail.image = image
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    cell.movieTitleThumbnail.alpha = 1.0
-                })
-        }, failure: nil)
+        // Check the image cache for the existing key. This is just a dictionary of UIImages.
+        var image = self.imageCache[thumbnailUrl]
         
+        if (image == nil) {
+            println("*** fetching thumbnail image <\(thumbnailUrl)>  across the network! ***")
+            cell.movieTitleThumbnail.setImageWithURLRequest(url_request, placeholderImage: placeholder,
+                success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
+                    cell.movieTitleThumbnail.alpha = 0.0
+                    cell.movieTitleThumbnail.image = image
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        cell.movieTitleThumbnail.alpha = 1.0
+                    })
+                    
+                    // Store the image in the image cache
+                    self.imageCache[thumbnailUrl] = image
+                    
+                    println("*** thumbnail image fetched successfully! ***")
+                    
+            }, failure: nil)
+        }
+        else {
+            println("*** thumbnail image <\(thumbnailUrl)> loaded successfully from image cache!")
+        }
         
         return cell
     }

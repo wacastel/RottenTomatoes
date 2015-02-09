@@ -9,12 +9,14 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var selectedMovie: NSDictionary?
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var moviePoster: UIImageView!
     @IBOutlet weak var movieDetailsLabel: UILabel!
     @IBOutlet weak var detailsScrollView: UIScrollView!
     @IBOutlet weak var textBackgroundLabel: UILabel!
+    
+    var selectedMovie: NSDictionary?
+    var fullSizedLoaded: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +25,10 @@ class MovieDetailsViewController: UIViewController {
         
         self.navigationItem.title = self.selectedMovie?["title"] as NSString
         self.movieTitle.text = self.selectedMovie?["title"] as NSString
-        let posters = self.selectedMovie?["posters"] as NSDictionary
-        let posterUrl = posters["original"] as NSString
-        let fullPosterUrl = getFullSizedUrl(posterUrl)
-        moviePoster.setImageWithURL(NSURL(string:fullPosterUrl))
+        
+        self.loadThumbnailImage()
+        self.loadFullSizedImage()
+        
         movieDetailsLabel.numberOfLines = 0
         movieDetailsLabel.text = self.selectedMovie?["synopsis"] as NSString
     }
@@ -34,6 +36,43 @@ class MovieDetailsViewController: UIViewController {
     func getFullSizedUrl(inputString: NSString) -> NSString {
         let newString = inputString.stringByReplacingOccurrencesOfString("tmb", withString: "ori")
         return newString
+    }
+    
+    func loadThumbnailImage() {
+        let posters = self.selectedMovie?["posters"] as NSDictionary
+        let thumbnailUrl = posters["thumbnail"] as NSString
+        //self.moviePoster.setImageWithURL(NSURL(string:thumbnailUrl))
+        
+        let image_url = NSURL(string: thumbnailUrl)
+        let url_request = NSURLRequest(URL: image_url!)
+        let placeholder = UIImage(named: "no_photo")
+        
+        moviePoster.setImageWithURLRequest(url_request, placeholderImage: placeholder,
+            success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
+                if (self.fullSizedLoaded == false) {
+                    self.moviePoster.alpha = 0.0
+                    self.moviePoster.image = image
+                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                        self.moviePoster.alpha = 1.0
+                    })
+                }
+            }, failure: nil)
+    }
+    
+    func loadFullSizedImage() {
+        let posters = self.selectedMovie?["posters"] as NSDictionary
+        let posterUrl = posters["original"] as NSString
+        let fullPosterUrl = getFullSizedUrl(posterUrl)
+        //moviePoster.setImageWithURL(NSURL(string:fullPosterUrl))
+        
+        let image_url = NSURL(string: fullPosterUrl)
+        let url_request = NSURLRequest(URL: image_url!)
+        
+        moviePoster.setImageWithURLRequest(url_request, placeholderImage: nil,
+            success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
+                self.moviePoster.image = image
+                self.fullSizedLoaded = true
+            }, failure: nil)
     }
     
     override func viewDidLayoutSubviews() {

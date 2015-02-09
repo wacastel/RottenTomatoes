@@ -71,8 +71,21 @@ class ViewController: UITableViewController {
         cell.movieTitleLabel.text = movie["title"] as NSString
         cell.movieSynopsisLabel.text = movie["synopsis"] as NSString
         let thumbnailUrl = posters["thumbnail"] as NSString
-        //let thumbnailUrl = "http://images.forbes.com/media/lists/companies/apple_200x200.jpg"
-        cell.movieTitleThumbnail.setImageWithURL(NSURL(string:thumbnailUrl))
+        //cell.movieTitleThumbnail.setImageWithURL(NSURL(string:thumbnailUrl))
+        let image_url = NSURL(string: thumbnailUrl)
+        let url_request = NSURLRequest(URL: image_url!)
+        let placeholder = UIImage(named: "no_photo")
+        
+        cell.movieTitleThumbnail.setImageWithURLRequest(url_request, placeholderImage: placeholder,
+            success: { (request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
+                cell.movieTitleThumbnail.alpha = 0.0
+                cell.movieTitleThumbnail.image = image
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    cell.movieTitleThumbnail.alpha = 1.0
+                })
+        }, failure: nil)
+        
+        
         return cell
     }
     
